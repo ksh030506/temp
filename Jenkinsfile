@@ -21,7 +21,7 @@ pipeline {
             steps {
                 echo 'Clonning Repository'
 
-                git url: 'https://github.com/ksh030506/temp.git',
+                git url: 'https://github.com/ksh030506/temp',
                     branch: 'master',
                     //Global credentials에 입력한 ID
                     credentialsId: 'jenkinsTest'
