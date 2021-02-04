@@ -50,7 +50,7 @@ pipeline {
             // 노예
             agent {
               //도커가 노드의 최신 버전을 깔아서 실행
-              docker {
+              docker { 
                 image 'node:latest'
               }
             }
