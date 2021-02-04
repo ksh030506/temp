@@ -31,36 +31,6 @@ pipeline {
                 // If Maven was able to run the tests, even if some of the test
                 // failed, record the test results and archive the jar file.
                 success {
-                    echo 'Successfully Cloned Repository'
-                }
-
-                //성공/실패 둘다 출력
-                always {
-                  echo "i tried..."
-                }
-
-                cleanup {
-                  echo "after all other post condition"
-                }
-            }
-        }
-        
-        // aws s3 에 파일을 올림
-        stage('Deploy Frontend') {
-          steps {
-            echo 'Deploying Frontend'
-            // 프론트엔드 디렉토리의 정적파일들을 S3 에 올림, 이 전에 반드시 EC2 instance profile 을 등록해야함.
-            dir ('./website'){
-                sh '''
-                aws s3 sync ./ s3://jenkinstestkim
-                '''
-            }
-          }
-
-          post {
-              // If Maven was able to run the tests, even if some of the test
-              // failed, record the test results and archive the jar file.
-              success {
                   echo 'Successfully Cloned Repository'
 
                   mail  to: 'llmm030506@gmail.com',
@@ -75,7 +45,16 @@ pipeline {
                         subject: "Failed Pipelinee",
                         body: "Something is wrong with deploy frontend"
               }
-          }
+
+                //성공/실패 둘다 출력
+                always {
+                  echo "i tried..."
+                }
+
+                cleanup {
+                  echo "after all other post condition"
+                }
+            }
         }
         
         stage('Lint Backend') {
