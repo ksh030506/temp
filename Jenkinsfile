@@ -21,7 +21,7 @@ pipeline {
             steps {
                 echo 'Clonning Repository'
 
-                git url: 'https://github.com/ksh030506/temp',
+                git url: 'https://github.com/ksh030506/temp.git',
                     branch: 'master',
                     //Global credentials에 입력한 ID
                     credentialsId: 'jenkinsTest'
@@ -31,20 +31,8 @@ pipeline {
                 // If Maven was able to run the tests, even if some of the test
                 // failed, record the test results and archive the jar file.
                 success {
-                  echo 'Successfully Cloned Repository'
-
-                  mail  to: 'llmm030506@gmail.com',
-                        subject: "Deploy Frontend Success",
-                        body: "Successfully deployed frontend!"
-              }
-
-              failure {
-                  echo 'I failed :('
-
-                  mail  to: 'llmm030506@gmail.com',
-                        subject: "Failed Pipelinee",
-                        body: "Something is wrong with deploy frontend"
-              }
+                    echo 'Successfully Cloned Repository'
+                }
 
                 //성공/실패 둘다 출력
                 always {
